@@ -2080,7 +2080,7 @@ C
             render();
         }
 
-        function toggleBookmark(id, reRenderList = false) {
+        function toggleBookmark(id) {
             if (state.history.bookmarks.includes(id)) {
                 state.history.bookmarks = state.history.bookmarks.filter(b => b !== id);
             } else {
@@ -2263,7 +2263,11 @@ C
         function renderQuiz() {
             const currentQ = state.quizQuestions[state.currentIndex];
             const isBookmarked = state.history.bookmarks.includes(currentQ.id);
-            const progressPct = ((state.currentIndex + 1) / state.quizQuestions.length) * 100;
+            
+            // 計算進度條與文字
+            const totalQ = state.quizQuestions.length;
+            const currQNum = state.currentIndex + 1;
+            const progressPct = (currQNum / totalQ) * 100;
 
             const optionsHtml = currentQ.displayOptions.map((opt, i) => {
                 const isSelected = state.userAnswers[state.currentIndex] === opt.originalIndex;
@@ -2299,11 +2303,22 @@ C
                 <div class="max-w-3xl mx-auto w-full flex-1 flex flex-col">
                     <div class="flex justify-between items-center mb-4">
                         <button onclick="goHome()" class="text-slate-500 hover:text-slate-800 font-medium transition-colors">← 回首頁</button>
-                        <div class="text-sm font-bold bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">Bank: ${currentQ.bank}</div>
+                        
+                        <!-- 🚀 這裡新增了原始題庫來源與題號標籤 -->
+                        <div class="text-xs md:text-sm font-bold bg-indigo-100 text-indigo-800 px-3 py-1.5 rounded-full shadow-sm">
+                            📁 題庫 ${currentQ.bank} - 第 ${currentQ.num} 題
+                        </div>
                     </div>
 
-                    <div class="w-full bg-slate-200 rounded-full h-2.5 mb-6 overflow-hidden">
-                        <div class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: ${progressPct}%"></div>
+                    <!-- 進度條 -->
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm text-slate-500 font-medium mb-2 px-1">
+                            <span>目前進度： ${currQNum} / ${totalQ} 題</span>
+                            <span>${Math.round(progressPct)}%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden shadow-inner">
+                            <div class="bg-indigo-600 h-3 rounded-full transition-all duration-500 ease-out" style="width: ${progressPct}%"></div>
+                        </div>
                     </div>
 
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 flex-1 flex flex-col">
@@ -2351,6 +2366,12 @@ C
                         </div>
                         <div class="flex-1 space-y-1">
                             <div class="font-medium text-slate-800">${q.text}</div>
+                            
+                            <!-- 🚀 作答明細這裡也加上了原始題號提示，方便複習找答案 -->
+                            <div class="text-xs text-slate-400 mb-2">
+                                來源：題庫 ${q.bank} - 第 ${q.num} 題
+                            </div>
+
                             <div class="text-sm text-slate-500 flex items-center gap-2">
                                 正確解答：<span class="font-bold text-emerald-600">${q.options[q.ansIndex]}</span>
                             </div>
