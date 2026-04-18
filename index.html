@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAD 系統分析與設計 刷題神器</title>
+    <!-- 引入 Tailwind CSS 進行快速排版 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 避免某些按鈕點擊時的預設藍色外框 */
+        button:focus { outline: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen">
+
+    <!-- 應用程式的主要容器 -->
+    <div id="app" class="p-4 md:p-8"></div>
+
+    <script>
+        // ==========================================
+        // 1. 題庫資料 (從 RTF 解析出的原始文字)
+        // ==========================================
+        const raw15 = `1)
+Management information systems:
+1)
+_______
+A)
+attempt to codify and manipulate knowledge rather than information
+B)
+are designed to help organizational decision makers make decisions
+C)
+automate the handling of data about business activities
+D)
+take relatively raw data that have been previously captured and convert them into a meaningful aggregated form that managers need to conduct their responsibilities
+
+2)
+The particular processes that an analyst will follow to help ensure that his work is complete, well-done, and understood by project team members best defines:
+2)
+_______
+A)
+techniques
+B)
+methodologies
+C)
+tools
+D)
+data flows
+
+3)
+Which of the following is based on an iterative, incremental approach to systems development and has inception, elaboration, construction, and transition phases?
+3)
+_______
+A)
+eXtreme Programming
+B)
+JAD
+C)
+RAD
+D)
+RUP
+
+4)
+Software designed to support the payroll function would best be classified as:
+4)
+_______
+A)
+system software
+B)
+design software
+C)
+analysis software
+D)
+application software
+
+5)
+Principles identified in the Agile Manifesto include:
+5)
+_______
+A)
+Our highest priority is to satisfy the customer through early and continuous delivery of valuable software.
+B)
+Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale.
+C)
+Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage.
+D)
+all of the above.
+
+6)
+The traditional methodology used to develop, maintain, and replace information systems best defines:
+6)
+_______
+A)
+RAD
+B)
+OOAD
+C)
+prototyping
+D)
+SDLC
+
+7)
+Which of the following is a structure that encapsulates attributes and methods that operate on those attributes?
+7)
+_______
+A)
+module
+B)
+object
+C)
+case
+D)
+container
+
+8)
+Which of the following is an IS characteristic for a decision support system?
+8)
+_______
+A)
+has a high-volume, data capture focus
+B)
+draws on diverse yet predictable data resources to aggregate and summarize data
+C)
+often involves semi-structured problems and the need to access data at different levels of detail
+D)
+provides expert advice by asking users a sequence of questions dependent on prior answers
+
+9)
+The property that occurs when entity types or object classes are arranged in a hierarchy and each entity type or object class assumes the attributes and methods of its ancestors best defines:
+9)
+_______
+A)
+polymorphism
+B)
+inheritance
+C)
+aggregation
+D)
+generalization
+
+10)
+During which of the following RUP phases will analysts define the scope, determine the feasibility of the project, understand user requirements, and prepare a software development plan?
+10)
+______
+A)
+elaboration
+B)
+construction
+C)
+transition
+D)
+inception
+
+11)
+The first administrative information system was:
+11)
+______
+A)
+General Electric's payroll system
+B)
+Ford Motor Company's order tracking system
+C)
+General Motor's order tracking system
+D)
+Coca-Cola's payroll system
+
+12)
+Which of the following is the software reuse step that involves making the reusable asset understandable to developers who want to use it in their systems?
+12)
+______
+A)
+conceptualization
+B)
+recontextualization
+C)
+abstraction
+D)
+storage
+
+13)
+The software reuse approach where developers are not required to practice reuse, but are encouraged to do so best describes:
+13)
+______
+A)
+ad hoc reuse
+B)
+flexible reuse
+C)
+facilitated reuse
+D)
+managed reuse
+
+14)
+The choice to acquire software from outside sources should be made:
+14)
+______
+A)
+at the end of the analysis phase
+B)
+at the end of the design phase
+C)
+at the beginning of the analysis phase
+D)
+at the middle of the analysis phase
+
+15)
+The document sent to vendors asking them to propose hardware and software that will meet the requirements of your new system is called a:
+15)
+______
+A)
+business case
+B)
+request for proposal
+C)
+baseline project plan
+D)
+requirements statement
+
+16)
+Which of the following is a software reuse approach that mandates the development, sharing, and adoption of reusable assets?
+16)
+______
+A)
+facilitated reuse
+B)
+ad hoc reuse
+C)
+flexible reuse
+D)
+managed reuse
+
+17)
+Which of the following is the software reuse step that involves making software assets available for others to use?
+17)
+______
+A)
+recontextualization
+B)
+storage
+C)
+conceptualization
+D)
+abstraction
+
+18)
+SAP AG is a(n):
+18)
+______
+A)
+application service provider
+B)
+custom software producer
+C)
+enterprise solution software provider
+D)
+hardware manufacturer
+
+19)
+Automated tools available to help you manage a development project are referred to as:
+19)
+______
+A)
+project management software
+B)
+systems development software
+C)
+diagram generators
+D)
+none of the above
+
+20)
+An on-line or hard copy repository for all project correspondence, inputs, outputs, deliverables, procedures, and standards that is used for performing project audits, orientation of new team members, communication with management and customers, identifying future projects, and performing postproject reviews is called:
+20)
+______
+A)
+a schedule book
+B)
+a project planner
+C)
+project management software
+D)
+a project workbook
+
+21)
+Which of the following is not a guideline for defining a task?
+21)
+______
+A)
+A task should have well accepted predecessor and successor steps.
+B)
+A task should have a single and identifiable deliverable.
+C)
+A task should always be completed by one person.
+D)
+A task should have a known method or technique.
+
+22)
+The third phase of the project management process in which the plans created in the prior phases are put into action is:
+22)
+______
+A)
+project planning
+B)
+project close down
+C)
+project execution
+D)
+project planning
+
+23)
+The responsibility for keeping all team members informed of the project status best describes the:
+23)
+______
+A)
+project update activity
+B)
+communicating the project status activity
+C)
+executing the baseline project plan activity
+D)
+monitoring project progress against the Baseline Project Plan activity
+
+24)
+Indicating when and how written and oral reports will be provided by the team, how team members will coordinate work, what messages will be sent to announce the project to interested parties, and what kinds of information will be shared with vendors and external contractors involved with the project describes:
+24)
+______
+A)
+determining project standards and procedures
+B)
+developing a Statement of Work
+C)
+setting a Baseline Project Plan
+D)
+developing a communication plan
+
+25)
+Which of the following best describes the top-down planning approach advantage, improved integration?
+25)
+______
+A)
+If not viewed from the top, information systems may be implemented without first understanding the business from general management's viewpoint.
+B)
+If not viewed from the top, planners may lack sufficient management acceptance of the role of information systems in helping them achieve business objectives.
+C)
+If not viewed from the top, totally new management information systems may be implemented rather than planning how to evolve existing systems.
+D)
+If not viewed from the top, planners may lack the understanding necessary to implement information systems across the entire business rather than simply to individual operating units.
+
+26)
+The method by which an organization attempts to achieve its mission and objectives best defines:
+26)
+______
+A)
+information systems plan
+B)
+critical success factors
+C)
+business policy
+D)
+competitive strategy
+
+27)
+Which of the following is a strategy for a low-cost producer?
+27)
+______
+A)
+capitalizing on a key product criteria requested by the market
+B)
+competing in an industry on the basis of product quality
+C)
+competing in an industry on the basis of product or service cost to the consumer
+D)
+competing in an industry on the basis of product quantity
+
+28)
+This approach begins by conducting an extensive analysis of the organization's mission, objectives, and strategy and determining the information requirements needed to meet each objective:
+28)
+______
+A)
+foundation planning
+B)
+top-down planning
+C)
+bottom-up planning
+D)
+democratic planning
+
+29)
+This approach requires the identification of business problems and opportunities used to define projects:
+29)
+______
+A)
+democratic planning
+B)
+top-down planning
+C)
+bottom-up planning
+D)
+foundation planning
+
+30)
+An assessment of the development group's understanding of the possible target hardware, software, and operating environments, system size, complexity, and the group's experience with similar systems should be included as part of:
+30)
+______
+A)
+operational feasibility
+B)
+schedule feasibility
+C)
+political feasibility
+D)
+technical feasibility
+
+31)
+The reduction of waste creation is an example of a(n):
+31)
+______
+A)
+intangible benefit
+B)
+operational benefit
+C)
+qualitative benefit
+D)
+tangible benefit
+
+32)
+The ratio of the net cash receipts of the project divided by the cash outlays of the project, enabling tradeoff analysis to be made between competing projects is often referred to as:
+32)
+______
+A)
+break-even analysis (BEA)
+B)
+return on investment (ROI)
+C)
+future value (FV)
+D)
+net present value (NPV)
+
+33)
+To identify the financial benefits and costs associated with the development project is the purpose of:
+33)
+______
+A)
+schedule feasibility
+B)
+technical feasibility
+C)
+economic feasibility
+D)
+operational feasibility
+
+34)
+The complex organizational process through which computer-based information systems are developed and maintained best defines:
+34)
+______
+A)
+prototyping
+B)
+joint application design
+C)
+information systems analysis and design
+D)
+none of the above
+
+35)
+Turning system specifications into a working system that is tested and then put into use describes:
+35)
+______
+A)
+maintenance
+B)
+physical design
+C)
+analysis
+D)
+implementation
+
+36)
+An iterative process of systems development in which requirements are converted to a working system that is continually revised through close collaboration between an analyst and users best defines:
+36)
+______
+A)
+Joint Application Design
+B)
+Participatory Design
+C)
+systems development life cycle
+D)
+prototyping
+
+37)
+Hiring a company to run your applications at your site on your computers is an example of:
+37)
+______
+A)
+a turnkey system
+B)
+realignment
+C)
+outsourcing
+D)
+downsizing
+
+38)
+The reuse of object libraries can result in:
+38)
+______
+A)
+reduced rework
+B)
+increased productivity
+C)
+reduced defect density
+D)
+all of the above
+
+39)
+Which of the following are primary reasons for undertaking systems development projects?
+39)
+______
+A)
+to solve business problems
+B)
+to take advantage of business opportunities
+C)
+to use state-of-the-art technology
+D)
+both A and B
+
+40)
+Which of the following is not a project close down phase?
+40)
+______
+A)
+conducting post project reviews
+B)
+communicating the project status
+C)
+closing down the project
+D)
+closing the customer contract
+
+41)
+A generic information systems planning methodology that attempts to gain a broad understanding of the information system needs of the entire organization defines:
+41)
+______
+A)
+foundation planning
+B)
+democratic planning
+C)
+bottom-up planning
+D)
+top-down planning
+
+42)
+Which of the following best describes the top-down planning approach advantage, better understanding?
+42)
+______
+A)
+If not viewed from the top, planners may lack sufficient management acceptance of the role of information systems in helping them achieve business objectives.
+B)
+If not viewed from the top, planners may lack the understanding necessary to implement information systems across the entire business rather than simply to individual operating units.
+C)
+If not viewed from the top, totally new management information systems may be implemented rather than planning how to evolve existing systems.
+D)
+If not viewed from the top, information systems may be implemented without first understanding the business from general management's viewpoint.
+
+43)
+A major outcome and deliverable from the project initiation and planning phase that contains the best estimate of a project's scope, benefits, costs, risks, and resource requirements defines the:
+43)
+______
+A)
+Mission Statement
+B)
+Baseline Project Plan
+C)
+Statement of Work
+D)
+Information Systems Plan
+
+44)
+Large, complex systems that consist of a series of independent system modules best describes:
+44)
+______
+A)
+customer relationship management systems
+B)
+supply chain management systems
+C)
+transaction processing systems
+D)
+enterprisewide systems
+
+45)
+According to a study cited in the textbook, which of the following development methods can lead to a larger maintenance burden?
+45)
+______
+A)
+outsourcing
+B)
+enterprisewide solutions
+C)
+packaged software
+D)
+in-house development
+
+46)
+Any person, group of people, piece of equipment, or material used in accomplishing an activity is referred to as a(n):
+46)
+______
+A)
+identifier
+B)
+agent
+C)
+entity
+D)
+resource
+
+47)
+If the project team and organizational officials reassess the project after each subsequent SDLC phase to determine if the business conditions have changed or if a more detailed understanding of a system's costs, benefits, and risks suggest that the project is not as worthy as previously thought, they are:
+47)
+______
+A)
+overly cautious
+B)
+using a CASE methodology
+C)
+adhering to a bottom-up commitment principle
+D)
+adhering to the incremental commitment principle
+
+48)
+At a walkthrough meeting, the person who ensures that the work product adheres to organizational technical standards is referred to as the:
+48)
+______
+A)
+coordinator
+B)
+standards bearer
+C)
+maintenance oracle
+D)
+user
+
+49)
+Which of the following RUP phases provides an architecture for the project at the end of its phase?
+49)
+______
+A)
+transition
+B)
+inception
+C)
+elaboration
+D)
+construction
+
+50)
+Based on 2005 services revenue, which of the following companies is the top global software company?
+50)
+______
+A)
+Accenture
+B)
+IBM
+C)
+Microsoft
+D)
+Compaq
+
+1)
+D
+2)
+A
+3)
+D
+4)
+D
+5)
+D
+6)
+D
+7)
+B
+8)
+C
+9)
+B
+10)
+D
+11)
+A
+12)
+B
+13)
+B
+14)
+A
+15)
+D
+16)
+D
+17)
+B
+18)
+C
+19)
+A
+20)
+D
+21)
+C
+22)
+C
+23)
+B
+24)
+D
+25)
+C
+26)
+D
+27)
+C
+28)
+B
+29)
+C
+30)
+D
+31)
+A
+32)
+B
+33)
+C
+34)
+C
+35)
+D
+36)
+D
+37)
+A
+38)
+D
+39)
+D
+40)
+B
+41)
+D
+42)
+B
+43)
+B
+44)
+D
+45)
+D
+46)
+D
+47)
+D
+48)
+B
+49)
+C
+50)
+B
+`;
+
+        const raw162 = `1)
+Projects produce ________ that are often reviewed by people outside the team.
+1)
+_______
+A)
+Methodologies
+B)
+Life cycles
+C)
+Systems
+D)
+Milestones
+
+2)
+Which of the below is a true statement regarding the systems development life cycle?
+2)
+_______
+A)
+It is not possible to complete some activities in one phase in parallel with those of another phase.
+B)
+The life cycle can be thought of as a linear process in which the end of the useful life of one system leads to the beginning of another project to develop a new version of or replace an existing system.
+C)
+The life cycle can be thought of as a circular process in which the end of the useful life of one system leads to the beginning of another project to develop a new version of or replace an existing system.
+D)
+The SDLC is not iterative.
+
+3)
+Which of the below is a traditional methodology used to develop, maintain, and replace information systems?
+3)
+_______
+A)
+RAD
+B)
+SDLC
+C)
+Prototyping
+D)
+OOAD
+
+4)
+Fowler recommends an agile process if your project involves all of the following except ________.
+4)
+_______
+A)
+Motivated developers
+B)
+Unpredictable requirements
+C)
+A low budget
+D)
+Customer who will get involved
+
+5)
+Which of the following are delivered after the completion of planning phase?
+5)
+_______
+A)
+Description of all functional features of the proposed system
+B)
+Functional, detailed specifications of all system elements
+C)
+Code, documentation, training procedures, and support capabilities
+D)
+Detailed steps, or work plan, for project
+
+6)
+The critical factor "Personnel" is related to which of the following critical factors in distinguishing agile methods from traditional systems development?
+6)
+_______
+A)
+Thrives in a culture where people feel comfortable and empowered by having many degrees of freedom
+B)
+Well matched to small products and teams
+C)
+Requires continuous presence of a critical mass of scarce experts
+D)
+Untested on safety-critical products
+
+7)
+Which of the following is a method for organizations to obtain applications for rent from a third-party provider who run the applications at a remote site?
+7)
+_______
+A)
+Cloud computing
+B)
+Pre-packaged software
+C)
+Information Technology (IT) service firms
+D)
+Enterprise Resource Planning (ERP)
+
+8)
+Which answer choice is NOT a benefit of ERP?
+8)
+_______
+A)
+ERP has flexible modules.
+B)
+ERP is less maintenance than all types of software.
+C)
+ERP uses a single repository of data.
+D)
+ERP is less expensive to implement because of economy of scale.
+
+9)
+What is the primary concern of IT managers as it relates to cloud computing?
+9)
+_______
+A)
+Not knowing the physical location of their applications
+B)
+Security
+C)
+Selecting an appropriate vendor
+D)
+Losing control of their data
+
+10)
+Which of the following is NOT an approach that an organization can take to software reuse?
+10)
+______
+A)
+Flexible reuse
+B)
+Facilitated reuse
+C)
+Ad hoc reuse
+D)
+Managed reuse
+
+11)
+When an organization has the resources and a system must be built from scratch, an organization should choose what type of software?
+11)
+______
+A)
+Open source
+B)
+Off the shelf
+C)
+In-house development
+D)
+Prepackaged software
+
+12)
+________ is the process of dividing the project into manageable tasks and logically ordering them to ensure a smooth evolution between tasks.
+12)
+______
+A)
+Work breakdown structure
+B)
+Project breakdown structure
+C)
+Task breakdown structure
+D)
+Management breakdown structure
+
+13)
+A ________ is an end product of an SDLC phase.
+13)
+______
+A)
+Deliverable
+B)
+System tester
+C)
+Modeler
+D)
+Requirement
+
+14)
+________ is NOT a skill pertaining to the risk and change management activity of a project manager.
+14)
+______
+A)
+Risk and opportunity identification and assessment
+B)
+Environmental scanning
+C)
+Resource redeployment
+D)
+Team-building
+
+15)
+COCOMO stands for ________.
+15)
+______
+A)
+Constructive Cost Model
+B)
+Constructive Correction Model
+C)
+Collective Cost Model
+D)
+Constructive Coordination Model
+
+16)
+Which of the following is an unknown that should be addressed when designing an Internet application?
+16)
+______
+A)
+Connection speed
+B)
+How many users will access the application at one time
+C)
+What the time zone of the user is
+D)
+How much it costs purchase satellite service
+
+17)
+The second activity in the ISP process is ________.
+17)
+______
+A)
+Describe the current situation
+B)
+Develop the logical design
+C)
+Describe the target situation, trends, and constraints
+D)
+Develop a transition strategy and plans
+
+18)
+Which of the following is NOT a reason why the planning-based approach for projects is better than the traditional approach?
+18)
+______
+A)
+The planning-based approach plans for the future.
+B)
+An organization's informational needs change more slowly.
+C)
+Business processes remain the same for at least five years.
+D)
+Data structures remain stable.
+
+19)
+Which of the following is NOT a reason a project would be removed from the project selection list?
+19)
+______
+A)
+The IS department feels it is too difficult to implement
+B)
+Unnecessary
+C)
+Redundant functionality
+D)
+Inconsistency with overall objectives
+
+20)
+________ is the process of defining clear activities necessary to complete activities in a single project.
+20)
+______
+A)
+Baseline
+B)
+Project planning
+C)
+Project initiation
+D)
+Business case
+
+21)
+Which of the following is an example of an intangible cost?
+21)
+______
+A)
+Labor costs
+B)
+Hardware costs
+C)
+Customer goodwill
+D)
+Employee training
+
+22)
+Why is it a good idea to participate in the PIP process?
+22)
+______
+A)
+PIP pays for itself later on in the project.
+B)
+Customers require it.
+C)
+To produce a model.
+D)
+Because everyone does it.
+
+23)
+What is the first step in the BPR effort?
+23)
+______
+A)
+List disruptive technologies.
+B)
+Understand the key processes.
+C)
+Use induction.
+D)
+Translate the key processes.
+
+24)
+Which of the following is NOT a phase in the Planning Game?
+24)
+______
+A)
+Documentation
+B)
+Commitment
+C)
+Steering
+D)
+Exploration
+
+25)
+If group members work alone in the beginning of the project and then pool the ideas with guidance, they are participating in ________.
+25)
+______
+A)
+A Nominal Group Technique
+B)
+A group interview
+C)
+A single interview
+D)
+The JAD process
+
+26)
+In which design phase of the SDLC are logical specifications of the system from logical design transformed into technology-specific details from which all programming and system construction can be accomplished?
+26)
+______
+A)
+High level design
+B)
+Physical design
+C)
+Conceptual design
+D)
+Logical design
+
+27)
+Which of the following is a drawback of the traditional waterfall SDLC approach?
+27)
+______
+A)
+Users are locked into requirements.
+B)
+It is too short of a process.
+C)
+The process is too chaotic.
+D)
+There are no criticisms.
+
+28)
+Which of the following is a function of an IT service firm?
+28)
+______
+A)
+Provide open source software
+B)
+Rent licenses
+C)
+Support an order entry system
+D)
+Run applications for customers
+
+29)
+Together, SAP controls the largest share of the ________ market.
+29)
+______
+A)
+In-house development
+B)
+ERP
+C)
+Ad hoc reuse
+D)
+Cloud computing
+
+30)
+Defining tasks in too much detail will make the management of the project ________.
+30)
+______
+A)
+Extremely streamlined
+B)
+Unnecessarily complex
+C)
+Simple
+D)
+Constructive
+
+31)
+What is another term for nonintegrated systems?
+31)
+______
+A)
+SAP systems
+B)
+Enterprise systems
+C)
+Islands of information
+D)
+ERP systems
+
+32)
+Which of the following is an example of a tangible benefit?
+32)
+______
+A)
+Error reduction in data entry
+B)
+Faster decision making
+C)
+Positive impacts on society
+D)
+Improvement of employee morale
+
+33)
+________ uses story cards as way to gather requirements.
+33)
+______
+A)
+eXtreme Programming
+B)
+Prototyping
+C)
+Agile Usage-Centered Design
+D)
+JAD meeting
+
+34)
+The primary unit for Scrum is the ________.
+34)
+______
+A)
+Analysis
+B)
+Milestone
+C)
+Sprint
+D)
+Goal
+
+35)
+Which of the following is a good practice when searching for alternative systems development strategies while considering outsourcing?
+35)
+______
+A)
+Consult organizations in your area.
+B)
+Look for the cheapest outsourcing company.
+C)
+Ask the information technology (IT) department for help.
+D)
+Create a SWAT analysis.
+
+36)
+________ is NOT a common skill pertaining to the leadership activity of a project manager.
+36)
+______
+A)
+Assigning activities
+B)
+Communication
+C)
+Monitoring progress
+D)
+Working on assigned activities
+
+37)
+What is the second major activity in the project identification and selection process?
+37)
+______
+A)
+Identifying potential projects
+B)
+Identifying a project team
+C)
+Choosing a final project
+D)
+Classifying IS development projects
+
+38)
+A common legal and contractual development in new application development is ________.
+38)
+______
+A)
+Expanding software licenses
+B)
+Determining which IS to develop
+C)
+The political ramifications of a new system
+D)
+Understanding how stakeholders feel about the system
+
+39)
+What typically does the first day entail in the JAD?
+39)
+______
+A)
+Overview of major problems
+B)
+Analysis of reports
+C)
+An analysis of the current system
+D)
+A review of roles in the JAD
+
+40)
+In the 1990s, developer used visual basic to design the user interfaces that ________.
+40)
+______
+A)
+Run client/server platforms
+B)
+Created the web
+C)
+Used SAP
+D)
+Enhanced wireless protocols
+
+1)
+D
+2)
+C
+3)
+B
+4)
+C
+5)
+D
+6)
+C
+7)
+A
+8)
+D
+9)
+B
+10)
+A
+11)
+C
+12)
+A
+13)
+A
+14)
+D
+15)
+A
+16)
+A
+17)
+C
+18)
+C
+19)
+A
+20)
+B
+21)
+C
+22)
+A
+23)
+B
+24)
+A
+25)
+A
+26)
+B
+27)
+A
+28)
+D
+29)
+B
+30)
+B
+31)
+C
+32)
+A
+33)
+A
+34)
+C
+35)
+A
+36)
+D
+37)
+D
+38)
+A
+39)
+A
+40)
+A
+`;
+
+        const raw16 = `1)
+Implementation activities include ________ such as finalization of documentation and training.
+1)
+_______
+A)
+Executive support
+B)
+Initial user support
+C)
+Team support
+D)
+Testing support
+
+2)
+Kyle is participating in the ________ of the design phase as he turns the logical design into technology specific details so the programming can be accomplished.
+2)
+_______
+A)
+Constructing of the system requirements portion
+B)
+Physical design
+C)
+Logical design
+D)
+Documentation
+
+3)
+According to Fowler, which of the following is NOT considered a valid individual methodology that comes under the umbrella of Agile Methodologies?
+3)
+_______
+A)
+Adaptive Software Development
+B)
+Passive Software development
+C)
+Crystal family of methodologies
+D)
+Scrum
+
+4)
+Which of the following are delivered after the completion of analysis phase?
+4)
+_______
+A)
+Functional, detailed specifications of all system elements
+B)
+Code, documentation, training procedures, and support capabilities
+C)
+Priorities for systems and projects; an architecture for data, networks, and selection hardware, and IS management are the result of associated systems
+D)
+Description of current system and where problems and opportunities are with a general recommendation on how to fix, enhance, or replace current system
+
+5)
+________ is/are the process(es) that an analyst will follow to help ensure that his work is complete, well-done, and understood by project team members.
+5)
+_______
+A)
+Tools
+B)
+Data flow
+C)
+Methodologies
+D)
+Techniques
+
+6)
+In which phase of the SDLC is an information system systematically repaired and improved?
+6)
+_______
+A)
+Analysis
+B)
+Implementation
+C)
+Maintenance
+D)
+Design
+
+7)
+________ measures the difficulty of loading the software and making it operational.
+7)
+_______
+A)
+Ease of installation
+B)
+Flexibility
+C)
+Functionality
+D)
+Installation viability
+
+8)
+Why is open-source software different than the other types of software?
+8)
+_______
+A)
+Only major corporations offer it.
+B)
+It is available via the Internet.
+C)
+The source code is free.
+D)
+Companies make money by offering maintenance contracts.
+
+9)
+Which of the following is an example of a prepackaged narrow, niche package offering?
+9)
+_______
+A)
+Turbotax
+B)
+ERP software
+C)
+Day care management software
+D)
+Microsoft Office Suite
+
+10)
+Which of the following is a reason why an organization might get rid of its entire information processing unit?
+10)
+______
+A)
+Because of political reasons
+B)
+Because the old system does not work anymore
+C)
+Because management does not like the IT department
+D)
+To hire better IT staff
+
+11)
+Which firm is best known for its ERP software solution?
+11)
+______
+A)
+Microsoft
+B)
+Google
+C)
+SAP AG
+D)
+Oracle
+
+12)
+Georgia was contacted by the CEO to research if adding a new data center makes sense for the organization from an economic and operational stand point. Georgia agreed to perform a(n) ________.
+12)
+______
+A)
+End product
+B)
+Feasibility study
+C)
+A systems service request
+D)
+System enhancement study
+
+13)
+Which of the following is FALSE with respect to resource estimation activity?
+13)
+______
+A)
+Project managers use a variety of tools to assist in making estimates of project size and costs. The most widely used method is called COCOMO.
+B)
+Resource estimates may need not be revised based upon the skills of the actual person (or people) assigned to a particular activity.
+C)
+This information is used to create a project resource plan.
+D)
+People are the most important, and expensive, part of project resource planning.
+
+14)
+To successfully orchestrate the construction of a complex information system, a project manager must have ________, leadership, and technical skills.
+14)
+______
+A)
+Initiating
+B)
+Planning
+C)
+Interpersonal
+D)
+Executing
+
+15)
+________ is a controlled process of initiating, planning, executing, and closing down a project.
+15)
+______
+A)
+System analysis
+B)
+Project management
+C)
+System design
+D)
+Project scheduling
+
+16)
+If an organization is looking at classifying a project based on the extent to which the project is viewed as improving customer service, the evaluation criteria is ________.
+16)
+______
+A)
+Project size
+B)
+Potential benefits
+C)
+Technical difficulty
+D)
+Resource availability
+
+17)
+Which of the following roles does NOT identify potential development projects?
+17)
+______
+A)
+CEO
+B)
+Customer focus groups
+C)
+User departments
+D)
+Steering committee
+
+18)
+Which of the following is an example of a project coming from a top-down source?
+18)
+______
+A)
+A project identified by managers
+B)
+A project identified by customers
+C)
+A project identified by a business unit
+D)
+A project identified by a steering committee
+
+19)
+What kind of statement is "We are in the business of designing, fabricating, and selling to retail stores high-quality wood furniture"?
+19)
+______
+A)
+Goal statement
+B)
+Mission statement
+C)
+Corporate policy
+D)
+Business statement
+
+20)
+All of these are elements of project planning except ________.
+20)
+______
+A)
+Setting a baseline project plan
+B)
+Describing the project scope, alternatives, and feasibility
+C)
+Identifying and assessing risk
+D)
+Identifying the entire team for the project
+
+21)
+All of the following are categories of feasibility except ________.
+21)
+______
+A)
+Scheduling
+B)
+Technical
+C)
+Scope
+D)
+Political
+
+22)
+Which of the following is NOT an example of a recurring cost?
+22)
+______
+A)
+Hardware leases
+B)
+System conversion
+C)
+Data storage expenses
+D)
+Software maintenance
+
+23)
+Which of the following is NOT a source of requirements gathering for the systems analyst?
+23)
+______
+A)
+Market conditions
+B)
+Procedures
+C)
+Users of the current system
+D)
+Reports
+
+24)
+Which of the following is a new, faster, and more flexible technique for analysis gathering requirements?
+24)
+______
+A)
+The planning game
+B)
+Users
+C)
+Procedures
+D)
+Observing users
+
+25)
+The first page of the interview guide contains all of the following except ________.
+25)
+______
+A)
+An outline of the interview
+B)
+Major objectives
+C)
+The outcome of the interview
+D)
+Who is being interviewed
+
+26)
+What are computer programs that make it easy to use and benefit from techniques and to faithfully follow the guidelines of the overall development methodology?
+26)
+______
+A)
+Data flow
+B)
+Methodologies
+C)
+Tools
+D)
+Techniques
+
+27)
+In OOAD-based development, a(n) ________ of the project signals the end of the construction phase.
+27)
+______
+A)
+Beta version
+B)
+Transitional version
+C)
+Iteration
+D)
+Diagram
+
+28)
+Which of the following is a reason why a company may outsource certain operations?
+28)
+______
+A)
+Increase time to market
+B)
+Decrease process efficiencies
+C)
+Keep the information technology staff from being bored
+D)
+Outsource noncore activities
+
+29)
+Which criteria would be the ranked most important when an organization is choosing off-the-shelf software?
+29)
+______
+A)
+Look at cost and then go from there.
+B)
+Vendor reliability and vendor support.
+C)
+It does not matter the criteria order as long as ease of installation is considered.
+D)
+The organization chooses the cheapest option.
+
+30)
+________ is NOT a skill pertaining to the management activity of a project manager.
+30)
+______
+A)
+Forecasting
+B)
+Assigning resources to activities
+C)
+Communicating expectations
+D)
+Monitoring outcomes
+
+31)
+Which of the following is NOT a generic strategy identified by Porter?
+31)
+______
+A)
+Product differentiation
+B)
+Product niche
+C)
+Low cost producer
+D)
+Product introduction
+
+32)
+Why is it a good idea to participate in the PIP process?
+32)
+______
+A)
+To produce a model.
+B)
+PIP pays for itself later on in the project.
+C)
+Customers require it.
+D)
+Because everyone does it.
+
+33)
+Which of the following is NOT a way informal systems develop?
+33)
+______
+A)
+Individual work habits
+B)
+Top management does not mandate it.
+C)
+Resistance to control
+D)
+Inadequate formal procedures
+
+34)
+________ would be classified as software designed to support the payroll function.
+34)
+______
+A)
+Analysis software
+B)
+Application software
+C)
+Design software
+D)
+System software
+
+35)
+Which of the following is a good practice when searching for alternative systems development strategies while considering outsourcing?
+35)
+______
+A)
+Consult organizations in your area.
+B)
+Ask the information technology (IT) department for help.
+C)
+Look for the cheapest outsourcing company.
+D)
+Create a SWAT analysis.
+
+36)
+________ is NOT a skill pertaining to the conflict management activity of a project manager.
+36)
+______
+A)
+Smoothing out personality differences
+B)
+Problem solving
+C)
+Monitoring
+D)
+Compromising
+
+37)
+If a project is selected, what is the most likely next step?
+37)
+______
+A)
+The project is no longer considered.
+B)
+The project will begin.
+C)
+The project has to be signed off by management.
+D)
+The project will be funded.
+
+38)
+________ are peer group reviews of any product created during the systems development process.
+38)
+______
+A)
+Management issues
+B)
+Feasibility assessment meetings
+C)
+Group meetings
+D)
+Walk-throughs
+
+39)
+What is at the core of systems analysis?
+39)
+______
+A)
+The project
+B)
+Procedures
+C)
+Collection of information
+D)
+The systems analyst
+
+40)
+Which of the following is a criticism of the software development life cycle?
+40)
+______
+A)
+Life-cycle reliance has created a lack of documentation for the system.
+B)
+The life-cycle is too short to create meaningful applications.
+C)
+Reliance on the life-cycle approach has forced dynamic processes into time phases doomed to fail.
+D)
+There it too much feedback in between phases causing the projects to take too long to complete.
+
+1)
+B
+2)
+B
+3)
+B
+4)
+D
+5)
+D
+6)
+C
+7)
+A
+8)
+C
+9)
+C
+10)
+A
+11)
+C
+12)
+B
+13)
+B
+14)
+C
+15)
+B
+16)
+B
+17)
+B
+18)
+D
+19)
+B
+20)
+D
+21)
+C
+22)
+B
+23)
+A
+24)
+A
+25)
+C
+26)
+C
+27)
+A
+28)
+D
+29)
+B
+30)
+A
+31)
+D
+32)
+B
+33)
+B
+34)
+B
+35)
+A
+36)
+C
+37)
+D
+38)
+D
+39)
+C
+40)
+C
+`;
+
+        // ==========================================
+        // 2. 智慧解析器
+        // ==========================================
+        function parseBank(text, bankId) {
+            const lines = text.split('\n').map(l => l.trim()).filter(l => l !== '');
+            const questions = [];
+            let currentQ = null;
+            let answerMap = {};
+
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i];
+
+                if (/^\d+\)$/.test(line) && lines[i + 1] && /^[A-D]$/.test(lines[i + 1])) {
+                    answerMap[line.replace(')', '')] = lines[i + 1];
+                    i++;
+                    continue;
+                }
+
+                if (/^\d+\)$/.test(line) && lines[i + 1] && /^_{3,}$/.test(lines[i + 1])) {
+                    i++;
+                    continue;
+                }
+
+                if (/^\d+\)$/.test(line)) {
+                    if (currentQ && currentQ.text && currentQ.options.length >= 2) {
+                        questions.push(currentQ);
+                    }
+                    let qNum = line.replace(')', '');
+                    currentQ = { id: `${bankId}-${qNum}`, num: qNum, text: lines[i + 1] || "", options: [], bank: bankId };
+                    i++;
+                    continue;
+                }
+
+                if (/^[A-D]\)$/.test(line) && currentQ) {
+                    currentQ.options.push(lines[i + 1] || "");
+                    i++;
+                    continue;
+                }
+
+                if (currentQ) {
+                    if (currentQ.options.length > 0) {
+                        currentQ.options[currentQ.options.length - 1] += " " + line;
+                    } else {
+                        currentQ.text += " " + line;
+                    }
+                }
+            }
+
+            if (currentQ && currentQ.text && currentQ.options.length >= 2) {
+                questions.push(currentQ);
+            }
+
+            questions.forEach(q => {
+                const ansLetter = answerMap[q.num];
+                if (ansLetter) {
+                    q.ansIndex = ansLetter.charCodeAt(0) - 65;
+                }
+            });
+
+            return questions.filter(q => q.ansIndex !== undefined);
+        }
+
+        const ALL_QUESTIONS = [
+            ...parseBank(raw15, '1-5'),
+            ...parseBank(raw16, '1-6'),
+            ...parseBank(raw162, '1-6.2')
+        ];
+
+        // ==========================================
+        // 3. SVG 圖示
+        // ==========================================
+        const icons = {
+            star: (filled, cls = "") => `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="${filled ? '#fbbf24' : 'none'}" stroke="${filled ? '#fbbf24' : 'currentColor'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${cls}"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`,
+            check: (cls = "") => `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="${cls}"><polyline points="20 6 9 17 4 12"></polyline></svg>`,
+            x: (cls = "") => `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="${cls}"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`
+        };
+
+        // ==========================================
+        // 4. 應用程式狀態管理
+        // ==========================================
+        let state = {
+            view: 'home',
+            history: JSON.parse(localStorage.getItem('sad_quiz_history')) || { wrong: [], bookmarks: [] },
+            settings: { bank: 'all', filter: 'all', count: '10', randomize: true },
+            quizQuestions: [],
+            currentIndex: 0,
+            userAnswers: {},
+            isAnswered: false
+        };
+
+        const appDiv = document.getElementById('app');
+
+        function saveHistory() {
+            localStorage.setItem('sad_quiz_history', JSON.stringify(state.history));
+        }
+
+        // ==========================================
+        // 5. 核心邏輯
+        // ==========================================
+        function updateSetting(key, value) {
+            state.settings[key] = value;
+            render();
+        }
+
+        function toggleBookmark(id, reRenderList = false) {
+            if (state.history.bookmarks.includes(id)) {
+                state.history.bookmarks = state.history.bookmarks.filter(b => b !== id);
+            } else {
+                state.history.bookmarks.push(id);
+            }
+            saveHistory();
+            render();
+        }
+
+        function startQuiz() {
+            let pool = [...ALL_QUESTIONS];
+
+            // 篩選題庫
+            if (state.settings.bank !== 'all') {
+                pool = pool.filter(q => q.bank === state.settings.bank);
+            }
+            
+            // 篩選錯題/標籤
+            if (state.settings.filter === 'wrong') {
+                pool = pool.filter(q => state.history.wrong.includes(q.id));
+            } else if (state.settings.filter === 'bookmarks') {
+                pool = pool.filter(q => state.history.bookmarks.includes(q.id));
+            }
+
+            if (pool.length === 0) {
+                alert("此條件下沒有題目可供測驗！\n(可能是你選擇了「僅錯題」，但目前還沒有答錯的題目。)");
+                return;
+            }
+
+            // 打亂題目
+            pool = pool.sort(() => Math.random() - 0.5);
+
+            // 截斷題數
+            if (state.settings.count !== 'all') {
+                pool = pool.slice(0, parseInt(state.settings.count));
+            }
+
+            // 處理選項隨機
+            state.quizQuestions = pool.map(q => {
+                let opts = q.options.map((text, idx) => ({ text, originalIndex: idx }));
+                if (state.settings.randomize) {
+                    opts = opts.sort(() => Math.random() - 0.5);
+                }
+                return { ...q, displayOptions: opts };
+            });
+
+            state.currentIndex = 0;
+            state.userAnswers = {};
+            state.isAnswered = false;
+            state.view = 'quiz';
+            render();
+        }
+
+        function selectOption(originalIndex) {
+            if (state.isAnswered) return;
+            
+            const currentQ = state.quizQuestions[state.currentIndex];
+            const isCorrect = originalIndex === currentQ.ansIndex;
+
+            state.userAnswers[state.currentIndex] = originalIndex;
+            state.isAnswered = true;
+
+            // 更新錯題本
+            const wrongSet = new Set(state.history.wrong);
+            if (!isCorrect) {
+                wrongSet.add(currentQ.id);
+            } else {
+                wrongSet.delete(currentQ.id); // 答對即移出錯題本
+            }
+            state.history.wrong = Array.from(wrongSet);
+            saveHistory();
+            render();
+        }
+
+        function goNext() {
+            if (state.currentIndex < state.quizQuestions.length - 1) {
+                state.currentIndex++;
+                state.isAnswered = false;
+            } else {
+                state.view = 'summary';
+            }
+            render();
+        }
+
+        function goHome() {
+            if(state.view === 'quiz' && !confirm('確定要放棄目前進度回首頁嗎？')) return;
+            state.view = 'home';
+            render();
+        }
+
+        function clearHistory() {
+            if(confirm('這將會清空所有的錯題本與標記紀錄，確定嗎？')){
+                state.history = { wrong: [], bookmarks: [] };
+                saveHistory();
+                render();
+            }
+        }
+
+        // ==========================================
+        // 6. 畫面渲染
+        // ==========================================
+        function renderHome() {
+            return `
+                <div class="max-w-2xl mx-auto space-y-6">
+                    <div class="text-center space-y-2">
+                        <h1 class="text-3xl font-bold text-indigo-600">SAD 系統分析與設計刷題神器</h1>
+                        <p class="text-slate-500">內建完整 130 題庫，支援本地記憶與隨機洗牌</p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <div class="text-3xl font-bold text-indigo-500">${ALL_QUESTIONS.length}</div>
+                            <div class="text-sm text-slate-500">總題數</div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center relative group">
+                            <div class="text-3xl font-bold text-rose-500">${state.history.wrong.length}</div>
+                            <div class="text-sm text-slate-500">錯題本</div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center relative group">
+                            <div class="text-3xl font-bold text-amber-500">${state.history.bookmarks.length}</div>
+                            <div class="text-sm text-slate-500">星號標記</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-5">
+                        <div class="flex justify-between items-center border-b pb-2">
+                            <h2 class="text-xl font-bold">自訂測驗設定</h2>
+                            <button onclick="clearHistory()" class="text-xs text-slate-400 hover:text-rose-500 underline">清空紀錄</button>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <label class="block text-sm font-medium text-slate-700">題庫來源</label>
+                            <select onchange="updateSetting('bank', this.value)" class="w-full p-3 rounded-lg border border-slate-300 bg-slate-50 focus:ring-2 focus:ring-indigo-500 outline-none">
+                                <option value="all" ${state.settings.bank === 'all' ? 'selected' : ''}>全部題庫 (1-5, 1-6, 1-6.2)</option>
+                                <option value="1-5" ${state.settings.bank === '1-5' ? 'selected' : ''}>單元 1-5 (50題)</option>
+                                <option value="1-6" ${state.settings.bank === '1-6' ? 'selected' : ''}>單元 1-6 (40題)</option>
+                                <option value="1-6.2" ${state.settings.bank === '1-6.2' ? 'selected' : ''}>單元 1-6.2 (40題)</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-3">
+                            <label class="block text-sm font-medium text-slate-700">題目過濾</label>
+                            <div class="flex flex-wrap gap-4">
+                                ${['all', 'wrong', 'bookmarks'].map(mode => `
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="filter" value="${mode}" onchange="updateSetting('filter', this.value)" ${state.settings.filter === mode ? 'checked' : ''} class="text-indigo-600 w-4 h-4" />
+                                        <span>${mode === 'all' ? '全部題目' : mode === 'wrong' ? '僅複習錯題' : '僅標記題目'}</span>
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-3">
+                                <label class="block text-sm font-medium text-slate-700">測驗題數</label>
+                                <select onchange="updateSetting('count', this.value)" class="w-full p-3 rounded-lg border border-slate-300 bg-slate-50 focus:ring-2 focus:ring-indigo-500 outline-none">
+                                    <option value="10" ${state.settings.count === '10' ? 'selected' : ''}>10 題</option>
+                                    <option value="20" ${state.settings.count === '20' ? 'selected' : ''}>20 題</option>
+                                    <option value="50" ${state.settings.count === '50' ? 'selected' : ''}>50 題</option>
+                                    <option value="all" ${state.settings.count === 'all' ? 'selected' : ''}>全部考完</option>
+                                </select>
+                            </div>
+                            <div class="space-y-3">
+                                <label class="block text-sm font-medium text-slate-700">選項順序</label>
+                                <label class="flex items-center gap-3 p-3 rounded-lg border border-slate-300 bg-slate-50 cursor-pointer h-[50px] select-none">
+                                    <input type="checkbox" onchange="updateSetting('randomize', this.checked)" ${state.settings.randomize ? 'checked' : ''} class="rounded text-indigo-600 w-4 h-4" />
+                                    <span>隨機打亂 A/B/C/D</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button onclick="startQuiz()" class="w-full py-4 mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors shadow-md">
+                            開始刷題！
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderQuiz() {
+            const currentQ = state.quizQuestions[state.currentIndex];
+            const isBookmarked = state.history.bookmarks.includes(currentQ.id);
+            const progressPct = ((state.currentIndex + 1) / state.quizQuestions.length) * 100;
+
+            const optionsHtml = currentQ.displayOptions.map((opt, i) => {
+                const isSelected = state.userAnswers[state.currentIndex] === opt.originalIndex;
+                const isCorrectAns = opt.originalIndex === currentQ.ansIndex;
+                
+                let btnClass = "w-full text-left p-4 rounded-xl border-2 transition-all flex items-start gap-3 ";
+                let iconHtml = "";
+                
+                if (!state.isAnswered) {
+                    btnClass += "border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 cursor-pointer";
+                } else {
+                    if (isCorrectAns) {
+                        btnClass += "border-emerald-500 bg-emerald-50 text-emerald-900";
+                        iconHtml = icons.check("text-emerald-500 flex-shrink-0");
+                    } else if (isSelected) {
+                        btnClass += "border-rose-500 bg-rose-50 text-rose-900";
+                        iconHtml = icons.x("text-rose-500 flex-shrink-0");
+                    } else {
+                        btnClass += "border-slate-100 bg-slate-50 text-slate-400 opacity-60 cursor-default";
+                    }
+                }
+
+                return `
+                    <button onclick="selectOption(${opt.originalIndex})" class="${btnClass}">
+                        <span class="font-bold w-6 flex-shrink-0 mt-0.5">${String.fromCharCode(65 + i)})</span>
+                        <span class="flex-1">${opt.text}</span>
+                        ${state.isAnswered ? iconHtml : ''}
+                    </button>
+                `;
+            }).join('');
+
+            return `
+                <div class="max-w-3xl mx-auto w-full flex-1 flex flex-col">
+                    <div class="flex justify-between items-center mb-4">
+                        <button onclick="goHome()" class="text-slate-500 hover:text-slate-800 font-medium transition-colors">← 回首頁</button>
+                        <div class="text-sm font-bold bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">Bank: ${currentQ.bank}</div>
+                    </div>
+
+                    <div class="w-full bg-slate-200 rounded-full h-2.5 mb-6 overflow-hidden">
+                        <div class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: ${progressPct}%"></div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start gap-4 mb-6">
+                            <h2 class="text-lg md:text-xl font-medium leading-relaxed">
+                                <span class="font-bold text-indigo-600 mr-2">${state.currentIndex + 1}.</span>
+                                ${currentQ.text}
+                            </h2>
+                            <button onclick="toggleBookmark('${currentQ.id}')" class="p-2 hover:bg-slate-100 rounded-full transition-colors flex-shrink-0" title="標記此題">
+                                ${icons.star(isBookmarked, "text-slate-400")}
+                            </button>
+                        </div>
+
+                        <div class="space-y-3 flex-1">
+                            ${optionsHtml}
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end min-h-[80px] items-center">
+                            ${state.isAnswered 
+                                ? `<button onclick="goNext()" class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors shadow-md flex items-center gap-2">
+                                    ${state.currentIndex < state.quizQuestions.length - 1 ? '下一題' : '看測驗結果'} →
+                                   </button>`
+                                : `<div class="text-slate-400 text-sm">請選擇一個答案</div>`
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSummary() {
+            let correctCount = 0;
+            state.quizQuestions.forEach((q, idx) => {
+                if (state.userAnswers[idx] === q.ansIndex) correctCount++;
+            });
+            const score = Math.round((correctCount / state.quizQuestions.length) * 100);
+
+            const detailsHtml = state.quizQuestions.map((q, idx) => {
+                const isCorrect = state.userAnswers[idx] === q.ansIndex;
+                const isBookmarked = state.history.bookmarks.includes(q.id);
+                return `
+                    <div class="p-4 hover:bg-slate-50 flex items-start gap-4 transition-colors">
+                        <div class="mt-1 flex-shrink-0">
+                            ${isCorrect ? icons.check("text-emerald-500") : icons.x("text-rose-500")}
+                        </div>
+                        <div class="flex-1 space-y-1">
+                            <div class="font-medium text-slate-800">${q.text}</div>
+                            <div class="text-sm text-slate-500 flex items-center gap-2">
+                                正確解答：<span class="font-bold text-emerald-600">${q.options[q.ansIndex]}</span>
+                            </div>
+                            ${(!isCorrect && state.userAnswers[idx] !== undefined) ? `
+                                <div class="text-sm text-slate-500 flex items-center gap-2">
+                                    你的作答：<span class="text-rose-500 line-through">${q.options[state.userAnswers[idx]]}</span>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <button onclick="toggleBookmark('${q.id}')" class="p-2 hover:bg-slate-200 rounded-full transition-colors flex-shrink-0">
+                            ${icons.star(isBookmarked, "text-slate-400 w-5 h-5")}
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            return `
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 text-center space-y-4">
+                        <h2 class="text-2xl font-bold text-slate-800">測驗完成！</h2>
+                        <div class="text-6xl font-black text-indigo-600 py-4">${score} <span class="text-2xl text-slate-400">分</span></div>
+                        <p class="text-slate-600">共 ${state.quizQuestions.length} 題，答對 ${correctCount} 題</p>
+                        
+                        <div class="pt-6">
+                            <button onclick="goHome()" class="px-8 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl transition-colors shadow-md">
+                                回首頁繼續刷題
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 bg-slate-100 border-b border-slate-200 font-bold text-slate-700">作答明細</div>
+                        <div class="divide-y divide-slate-100">
+                            ${detailsHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function render() {
+            if (state.view === 'home') appDiv.innerHTML = renderHome();
+            else if (state.view === 'quiz') appDiv.innerHTML = renderQuiz();
+            else if (state.view === 'summary') appDiv.innerHTML = renderSummary();
+        }
+
+        // 初始化
+        render();
+
+    </script>
+</body>
+</html>
